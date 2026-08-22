@@ -1,91 +1,32 @@
-# Atom — Marketing Site, Docs & Blog
+# atom-web
 
-pnpm + Turbo monorepo containing the Atom public website, documentation, and blog.
+The [useatom.dev](https://useatom.dev) marketing site and docs. Next.js 16 static export, all lowercase, black and white with status-color accents.
 
 ## Quick Start
 
 ```bash
 nvm use 22.12.0
-pnpm install                    # install all workspace dependencies
-
-# Run everything
-pnpm dev                        # starts both apps via Turbo
-
-# Or run individually
-cd apps/web  && pnpm dev        # marketing site on http://localhost:8502
-cd apps/blog && pnpm dev        # blog on http://localhost:8503
+npm install
+npm run dev          # http://localhost:8502
 ```
 
-## Requirements
+`npm run build` produces the full static site in `out/` (deployable to any static host).
 
-- Node.js 22.x
-- pnpm (`npm install -g pnpm`)
+## What's Inside
 
-## Structure
+- **Landing page** (`src/components/home/`): hero with a cursor-reactive particle field (`atom-field.tsx`, three.js), four-angle copy, differentiator pills, a Slack thread mockup, features, agent install section, FAQ.
+- **Docs** (`/docs`): six pages rendered from markdown with a sticky index sidebar. Content lives in `src/content/docs/*.md` as the single source.
+- **Agent surface**: every docs page ships a raw markdown twin at `/docs/<page>.md`; `public/llms.txt` indexes them (llmstxt.org format) and `llms-full.txt` concatenates everything. `llms-install.md` is the step-by-step agent install guide.
+- **SEO**: generated `sitemap.xml`, `robots.txt`, favicon (`src/app/icon.svg`), per-page metadata.
 
-```
-atom-web/
-  pnpm-workspace.yaml          # workspace config
-  turbo.json                    # Turbo task pipeline
-  apps/
-    web/                        # Marketing site + docs (Next.js 16)
-    blog/                       # Blog (Astro)
-  packages/
-    tailwind-config/            # Shared Tailwind theme (colors, fonts, spacing)
-```
+## Editing Docs
 
-## apps/web — Marketing Site (port 8502)
+Edit the markdown in `src/content/docs/`. The `prebuild`/`predev` script (`scripts/build-docs-mirrors.mjs`) mirrors pages into `public/docs/` and regenerates `llms-full.txt` automatically. To add a page, create the markdown file and register it in `src/lib/docs.ts`.
 
-Next.js 16 with App Router, Tailwind CSS v4, Framer Motion.
+## Copy Rules
 
-**Pages:**
-- `/` — Landing page (hero, problem, how-it-works, features, pricing, CTA)
-- `/pricing` — Pricing comparison (Free / Pro / Enterprise)
-- `/docs` — Documentation hub with quick-start guide
-- `/changelog` — Release history
-- `/privacy` — Privacy policy
-- `/terms` — Terms of service
-- `/sitemap.xml` — Auto-generated sitemap
+All lowercase. No em dashes, no unnecessary hyphenated compounds, complete natural sentences. Realistic command examples instead of `<placeholder>` syntax.
 
-**Environment variables** (`.env.local`):
-```
-NEXT_PUBLIC_APP_URL=https://app.useatom.dev
-NEXT_PUBLIC_API_URL=https://api.useatom.dev
-NEXT_PUBLIC_BLOG_URL=https://blog.useatom.dev
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=useatom.dev
-```
+## Stack
 
-**Scripts:**
-```bash
-pnpm dev        # dev server on :8502
-pnpm build      # production build (static export)
-pnpm start      # serve production build on :8502
-```
-
-## apps/blog — Blog (port 8503)
-
-Astro with MDX support and auto-generated sitemap.
-
-**Content:** Blog posts in `src/content/blog/` as Markdown/MDX files.
-
-**Scripts:**
-```bash
-pnpm dev        # dev server on :8503
-pnpm build      # static build to dist/
-pnpm preview    # preview build on :8503
-```
-
-## packages/tailwind-config
-
-Shared Tailwind configuration with Atom design tokens:
-- Purple primary palette (#5B21B6)
-- Gold accent (#F59E0B)
-- PR status colors (open, merged, closed, draft)
-- Plus Jakarta Sans + JetBrains Mono fonts
-- Custom heading sizes (hero, h1, h2, h3)
-
-## Build All
-
-```bash
-pnpm build      # builds both apps via Turbo
-```
+Next.js 16 (`output: "export"`, trailing slashes), Tailwind CSS v4, framer-motion, three (hero field), react-markdown + remark-gfm (docs).
