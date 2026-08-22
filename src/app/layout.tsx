@@ -17,7 +17,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "atom | pull requests, where your team already is",
+  title: "atom | the developer productivity platform for fast moving engineering teams",
   description:
     "atom streams github into tidy slack threads, chases reviews for you, and runs your daily standup with a live board. install it in two minutes from your terminal, or point your coding agent at our docs.",
   metadataBase: new URL("https://useatom.dev"),

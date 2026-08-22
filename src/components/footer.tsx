@@ -35,9 +35,9 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-wrap items-start justify-between gap-12 px-6 py-16">
         <div className="flex flex-col gap-2">
           <span className="text-lg font-semibold text-ink">atom</span>
-          <span className="text-base text-ink-2 max-w-xs leading-relaxed">
-            pull requests, reminders, and standups in slack, built for teams
-            and their coding agents.
+          <span className="text-base text-ink-2 max-w-sm leading-relaxed">
+            the developer productivity platform for fast moving engineering
+            teams.
           </span>
           <span className="text-xs text-ink-2 mt-2">
             &copy; {new Date().getFullYear()} atom
