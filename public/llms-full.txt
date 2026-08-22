@@ -1,0 +1,302 @@
+# atom, full documentation
+
+> atom is a github to slack platform for engineering teams: living pr threads, review actions attributed to you, pr reminders, and standups. install with `npx @useatom/cli init`. this file concatenates every docs page; individual pages live at https://useatom.dev/docs/<page>.md
+
+
+---
+
+# install atom
+
+atom connects your github organization to your slack workspace. setup takes about two minutes and runs entirely from your terminal.
+
+## quick start
+
+```bash
+npx @useatom/cli init
+```
+
+the wizard walks you through four steps:
+
+1. **sign in with github.** your browser opens, you authorize, and the terminal picks up your session automatically.
+2. **install the github app** on your organization. atom needs to see pull request activity for the repos you choose.
+3. **install the slack bot** in your workspace.
+4. **map your first repo to a channel.** pull request threads for that repo will post there.
+
+every step resumes where it left off, so rerunning `init` after an interruption is safe.
+
+## install the cli globally
+
+```bash
+npm install -g @useatom/cli
+atom init
+```
+
+## bring your team in
+
+teammates join with an invite code instead of installing anything on github or slack:
+
+```bash
+atom invite          # you: prints the invite code
+atom join <code>     # them: joins your workspace
+```
+
+each teammate then links their slack identity by running `/atom connect` inside slack. linking is what makes review requests reach the right person and lets `@atom approve` act as them on github.
+
+## installing with a coding agent
+
+atom is built to be installed by agents. point claude code or any coding agent at this site:
+
+```bash
+claude "set up atom for my team by following https://useatom.dev/llms-install.md"
+```
+
+the cli is fully non-interactive when it needs to be, every command supports `--json`, and an mcp server exposes configuration as tools. see the [mcp docs](/docs/mcp/) for wiring it up.
+
+## requirements
+
+- node 18.17 or newer for the cli
+- admin access on the github organization (to install the github app)
+- permission to add apps to the slack workspace
+
+if you have neither github nor slack admin access, run `atom init` anyway: it prints an invite link you can hand to the person who does.
+
+---
+
+# using atom in slack
+
+atom has three surfaces in slack: slash commands for configuration, mentions for everything conversational, and dms for standups.
+
+## slash commands
+
+| command | what it does |
+|---|---|
+| `/atom help` | how to work with atom, with setup links if something is not connected yet. |
+| `/atom connect` | link your slack identity to your github account. this is what routes review requests to you and lets atom act as you on github. |
+| `/atom reminders` | configure pr reminders for the channel you are in. the form pre-loads the existing config and pre-selects the channel's repos. |
+| `/atom reminders off` | turn reminders off for this channel. |
+| `/atom standup` | configure the standup: participants, nudge time, board time, days. the board posts to the channel you run this in. |
+| `/atom standup off` | pause the standup. config and history are kept. |
+
+configuration confirmations post in the channel so the whole team sees what changed.
+
+## mention atom in a channel
+
+| say | what happens |
+|---|---|
+| `@atom pending prs` | a summary of open pull requests for this channel's repos, grouped by repo with authors and ages. |
+| `@atom my prs` | everything waiting on you across the workspace: your prs, assignments, and requested reviews. visible only to you. |
+| `@atom reminder config` | this channel's reminder schedule. |
+| `@atom standup config` | the standup schedule and participants. |
+| `@atom feedback ...` | send us feedback, right from slack. |
+| `@atom help` | what atom can do in a channel. |
+
+plain language works: atom understands phrasing like "@atom what's waiting on me?".
+
+## mention atom in a pull request thread
+
+inside a pr thread, mentions act on that pull request, on github, as you:
+
+| say | what happens |
+|---|---|
+| `@atom approve` | approves the pr. add a message after it if you like. `@atom lgtm` works too. |
+| `@atom request changes needs tests` | requests changes with your feedback. |
+| `@atom comment deploying after lunch` | comments on the pr. |
+| `@atom request review from @teammate` | requests a review. |
+| `@atom assign @teammate` | assigns them. |
+| `@atom add labels docs, do not merge` | adds labels, comma separated, validated against the repo's real labels. |
+| `@atom remove labels docs` | removes labels. |
+| `@atom close` and `@atom reopen` | closes or reopens the pr. |
+
+a successful action gets a checkmark reaction on your message and nothing else: the thread stays clean because your command is the record. errors are visible only to you. approving never falls back to a bot account, so an approval from slack is a real approval from you.
+
+## notifications you can live with
+
+- one message per event, never two.
+- the pr message edits itself through open, changes requested, approved, merged, and closed.
+- dms only when something waits on you, and the dm badge updates itself when it no longer does.
+- pushes show the real commit count and messages, linked to the compare view.
+
+---
+
+# cli reference
+
+the atom cli (`@useatom/cli`, binary `atom`) is the fastest way to set up and configure atom. every command supports `--json` for machine-readable output and exits 0 on success, 1 on failure.
+
+## setup commands
+
+| command | what it does |
+|---|---|
+| `atom init` | interactive setup: sign in, create or pick a workspace, connect github and slack, map a repo. resumable. |
+| `atom login` | sign in with github through your browser. `--manual` prints a url and lets you paste the token back. `--with-token` reads a token from `$ATOM_TOKEN` or stdin. |
+| `atom logout` | sign out and clear stored credentials. |
+| `atom connect github` | install the github app on your organization. add `--force` to reconnect. |
+| `atom connect slack` | install the slack bot. `--force` reinstalls, which you need after a permissions change. |
+
+## workspace commands
+
+| command | what it does |
+|---|---|
+| `atom status` | workspace overview: connections, mappings, plan. |
+| `atom whoami` | the signed-in user and their workspaces. |
+| `atom invite` | print the invite code for teammates. |
+| `atom join <code>` | join a workspace with an invite code. pasted invite links work too. |
+
+## repos and channels
+
+| command | what it does |
+|---|---|
+| `atom map [repo] [channel]` | route a repo's pull requests to a slack channel. accepts bare repo names and `#channel` names. interactive without arguments. |
+| `atom unmap [repo]` | remove a mapping. `-y` skips the confirmation. |
+| `atom repos` | list repos and their mapped channels. |
+| `atom channels` | list slack channels the bot can post to. |
+
+one channel can carry many repos. each repo maps to exactly one channel.
+
+## pr reminders
+
+| command | what it does |
+|---|---|
+| `atom reminders` | list reminder configs. |
+| `atom reminders set --channel #x` | create or update reminders for a channel. options: `--time 10:00`, `--tz America/New_York`, `--days mon,tue,wed,thu,fri`, `--repos api,web`. repos default to the channel's mapped repos. |
+| `atom reminders delete --channel #x` | remove reminders from a channel. |
+
+## standup
+
+| command | what it does |
+|---|---|
+| `atom standup status` | show the standup config and participants. |
+| `atom standup enable --channel #x` | enable the standup. options: `--nudge 09:30`, `--post 11:00`, `--tz Zone`, `--days mon,fri`. |
+| `atom standup disable` | pause the standup. config and history are kept. |
+| `atom standup add-user <github-login>` | enroll a workspace member. participation is opt-in. |
+| `atom standup remove-user <github-login>` | remove a participant. |
+
+## environment variables
+
+| variable | purpose |
+|---|---|
+| `ATOM_API_URL` | point the cli at a different atom server. |
+| `ATOM_TOKEN` | provide a token without touching the config file. never persisted. |
+| `ATOM_CONFIG_DIR` | use an alternate config directory, useful for a second account. |
+
+configuration lives in `~/.useatom/config.json` with owner-only permissions.
+
+---
+
+# mcp server
+
+atom ships a model context protocol server inside the cli, so coding agents can set up and configure atom conversationally. it speaks json-rpc over stdio and reuses your cli login.
+
+## wiring it up
+
+sign in once, then register the server with your agent:
+
+```bash
+atom login
+claude mcp add atom -- atom mcp
+```
+
+no global install is needed either:
+
+```bash
+claude mcp add atom -- npx -y @useatom/cli mcp
+```
+
+any mcp-capable client works the same way: run `atom mcp` as a stdio server.
+
+## tools
+
+| tool | what it does |
+|---|---|
+| `atom_status` | workspace overview: github and slack connection state, plan, mapping count. |
+| `list_repos` | github repos available in the workspace. |
+| `list_channels` | slack channels the bot can post to. |
+| `list_mappings` | which repo posts to which channel. |
+| `map_repo` | route a repo to a channel. accepts bare names and `#channel`. |
+| `unmap_repo` | remove a repo's mapping. |
+| `get_invite_link` | invite code for bringing teammates in. |
+| `list_reminders` | pr reminder configs per channel. |
+| `set_reminder` | create or update a channel's reminders. repos default to the channel's mappings. |
+| `delete_reminder` | remove a channel's reminders. |
+| `get_standup` | the standup config: times, days, participants. |
+| `set_standup` | create, update, pause, or resume the standup. |
+| `add_standup_participant` | enroll a member by github login. |
+| `remove_standup_participant` | remove a participant. |
+
+errors come back as tool results with `isError`, never as crashes, so agents can read the message and correct course.
+
+## a typical agent session
+
+an agent asked to "set up pr notifications for the api repo in #eng" would call `atom_status` to check connections, `list_repos` and `list_channels` to resolve names, and `map_repo` to create the route. asked for "a daily reminder at 9:30 eastern", it follows with `set_reminder`. the whole configuration surface of atom is reachable this way.
+
+---
+
+# pr reminders
+
+reminders post a scheduled summary of open pull requests to a channel, so stale reviews surface before they become week-old reviews.
+
+## what the summary looks like
+
+a single message, grouped by repo:
+
+- each pull request with its linked title, the author linked to their github profile, and how long it has been open
+- draft prs tagged `(draft)` and excluded from the waiting count
+- a closing line like "3 pull requests across 2 repositories are waiting for review"
+- when everything is clear: "no open pull requests right now. everything is clear."
+
+## configure from slack
+
+run `/atom reminders` in the channel that should receive the summary. the form covers timezone, time of day, days of the week, and which repos to include. it pre-selects the channel's mapped repos, and if a config already exists it loads it for editing. saving posts a confirmation in the channel.
+
+turn them off with `/atom reminders off`.
+
+## configure from the terminal
+
+```bash
+atom reminders set --channel #eng-reviews --time 10:00 --tz America/New_York --days mon,tue,wed,thu,fri
+atom reminders                       # list configs
+atom reminders delete --channel #eng-reviews
+```
+
+repos default to the channel's mapped repos when you leave `--repos` out.
+
+## on demand
+
+ask `@atom pending prs` in any configured channel for the same summary immediately, without waiting for the schedule.
+
+## behavior notes
+
+- one config per channel, and different channels can run different schedules, timezones, and repo sets.
+- times are interpreted in the config's timezone with a fifteen minute delivery window.
+- if github cannot be reached for every configured repo, atom skips the post rather than reporting a false all-clear.
+
+---
+
+# standups
+
+atom runs your daily standup without forms, threads, or another bot subscription. participants reply to a dm, and a live board in your channel fills in as updates land.
+
+## the daily cycle
+
+1. **the nudge.** at the time you set, every participant who has not submitted gets a dm: "standup time. what are you working on today? reply here and i'll log your update."
+2. **the reply.** they answer in plain words, as one message or several through the day. atom understands free-form text and splits multi-item updates into clean bullets. same-day messages append.
+3. **the ack.** a checkmark reaction and a short confirmation, so nobody wonders whether it counted.
+4. **the board.** at post time, one message appears in the standup channel with everyone's updates. it keeps editing itself in place as later updates arrive. submitters are mentioned on their entries; the "waiting on" list stays unpinged and shrinks live.
+
+greetings and questions sent to the bot are answered, not logged. only real updates reach the board.
+
+## configure from slack
+
+run `/atom standup` in the channel where the board should live. pick participants with the user picker, set the nudge time, board time, timezone, and days. participation is opt-in: nobody is enrolled automatically. pause any time with `/atom standup off`; config and history are kept.
+
+## configure from the terminal
+
+```bash
+atom standup enable --channel #standup --nudge 09:30 --post 11:00 --tz America/New_York
+atom standup add-user teammate-github-login
+atom standup status
+atom standup disable
+```
+
+## check the setup
+
+ask `@atom standup config` in any channel to see the schedule, board channel, and participants.

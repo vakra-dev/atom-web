@@ -10,15 +10,18 @@ const groups = [
     ],
   },
   {
-    title: "company",
+    title: "docs",
     links: [
-      { label: "about", href: "/about" },
-      { label: "contact", href: "mailto:support@useatom.dev" },
+      { label: "install", href: "/docs/install/" },
+      { label: "cli reference", href: "/docs/cli/" },
+      { label: "mcp server", href: "/docs/mcp/" },
+      { label: "llms.txt", href: "/llms.txt" },
     ],
   },
   {
-    title: "legal",
+    title: "company",
     links: [
+      { label: "contact", href: "mailto:support@useatom.dev" },
       { label: "privacy", href: "/privacy" },
       { label: "terms", href: "/terms" },
     ],
@@ -32,7 +35,8 @@ export function Footer() {
         <div className="flex flex-col gap-2">
           <span className="text-lg font-semibold text-ink">atom</span>
           <span className="text-base text-ink-2 max-w-xs leading-relaxed">
-            the developer productivity platform for fast moving engineering teams.
+            pull requests, reminders, and standups in slack, built for teams
+            and their coding agents.
           </span>
           <span className="text-xs text-ink-2 mt-2">
             &copy; {new Date().getFullYear()} atom
@@ -43,27 +47,15 @@ export function Footer() {
           {groups.map((group) => (
             <div key={group.title} className="flex flex-col gap-2">
               <span className="eyebrow mb-1">{group.title}</span>
-              {group.links.map((link) =>
-                "external" in link && link.external ? (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base text-ink-2 no-underline transition-colors hover:text-ink"
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    className="text-base text-ink-2 no-underline transition-colors hover:text-ink"
-                  >
-                    {link.label}
-                  </Link>
-                )
-              )}
+              {group.links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-base text-ink-2 no-underline transition-colors hover:text-ink"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           ))}
         </div>

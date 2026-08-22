@@ -9,20 +9,29 @@ export function Solution() {
         <FadeIn>
           <p className="eyebrow mb-4">the solution</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-8">
-            one platform. complete pr visibility.
+            code review at the speed of conversation.
           </h2>
         </FadeIn>
         <FadeIn delay={0.15}>
           <div className="space-y-4 text-base text-ink-2 leading-relaxed">
             <p>
-              Atom gives your engineering team a single, structured view of every pull request, right
-              inside Slack. Every PR gets a live status card and a dedicated thread. Reviews, comments,
-              approvals, and assignments flow in as they happen. The right people get notified at the
-              right time.
+              every pull request becomes one living thread in the channel that owns
+              the repo. the main message carries the status, from open through
+              changes requested and approved to merged, and edits itself in place as
+              things happen. reviews, comments, pushes, and assignments land as
+              tidy replies underneath.
             </p>
             <p>
-              No more context switching. No more chasing updates. No more PRs that sit untouched for
-              days.
+              and the thread is not just a feed. reply with{" "}
+              <code className="px-1.5 py-0.5 rounded bg-surface border border-line text-ink font-mono text-[13px]">
+                @atom approve
+              </code>{" "}
+              or{" "}
+              <code className="px-1.5 py-0.5 rounded bg-surface border border-line text-ink font-mono text-[13px]">
+                @atom request changes needs tests
+              </code>{" "}
+              and the review lands on github attributed to you. no tab switch, no
+              bot in your review history.
             </p>
           </div>
         </FadeIn>

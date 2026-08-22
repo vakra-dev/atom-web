@@ -17,14 +17,14 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "atom | never miss a pull request again",
+  title: "atom | pull requests, where your team already is",
   description:
-    "Atom is the developer productivity platform that brings GitHub pull requests into Slack. Threaded, tracked, and always visible. Built for fast-moving engineering teams.",
+    "atom streams github into tidy slack threads, chases reviews for you, and runs your daily standup with a live board. install it in two minutes from your terminal, or point your coding agent at our docs.",
   metadataBase: new URL("https://useatom.dev"),
   openGraph: {
-    title: "never miss a pull request again.",
+    title: "pull requests, where your team already is.",
     description:
-      "Atom brings GitHub PR activity into Slack with threaded conversations, live status tracking, and smart notifications. Built for engineering teams that ship fast.",
+      "atom turns github pull requests into living slack threads. review and approve from slack, attributed to you on github. one bot for prs, reminders, and standups.",
     siteName: "atom",
     locale: "en_US",
     type: "website",

@@ -13,74 +13,62 @@ function C({ children }: { children: ReactNode }) {
 
 const features = [
   {
-    title: "threaded pr conversations",
+    title: "living pr threads",
     desc: (
       <>
-        Every PR gets its own thread. Comments, reviews, approvals, and assignments — one thread,
-        one story, from <C>open</C> to <C>merge</C>.
+        one thread per pull request. the main message flips through five states,
+        from <C>open</C> to <C>merged</C>, editing itself in place with title,
+        link, commits, and diff counts always current.
       </>
     ),
   },
   {
-    title: "live status tracking",
+    title: "act as yourself",
     desc: (
       <>
-        Status cards update in real time. <C>[OPEN]</C> <C>[MERGED]</C> <C>[CLOSED]</C>.
-        Your channel becomes a living dashboard of code velocity.
+        <C>@atom approve</C>, <C>request changes</C>, <C>comment</C>,{" "}
+        <C>assign</C>, <C>labels</C>, <C>close</C>, <C>reopen</C>. every action
+        runs on github under your name, not a bot account. plain language works
+        too, like <C>@atom lgtm</C>.
       </>
     ),
   },
   {
-    title: "intelligent routing",
+    title: "noise you can actually stand",
     desc: (
       <>
-        Map repos to channels. Frontend PRs go to <C>#frontend</C>, platform PRs to{" "}
-        <C>#platform</C>. Every notification reaches the right team.
+        one message per event, never two. status changes edit existing messages
+        instead of reposting. dms only when something waits on you, with badges
+        that update themselves when it no longer does.
       </>
     ),
   },
   {
-    title: "smart mentions",
+    title: "pr reminders",
     desc: (
       <>
-        Atom maps GitHub identities to Slack profiles. When a review is requested, the right person
-        gets <C>@mentioned</C> directly.
+        a scheduled summary of open pull requests per channel, grouped by repo
+        with authors and ages. drafts tagged, timezones respected. configure it
+        with <C>/atom reminders</C> right in the channel.
       </>
     ),
   },
   {
-    title: "daily pr reminders",
+    title: "standups without the standup bot",
     desc: (
       <>
-        Automated summaries of open pull requests. Configure repos, days, and delivery time.
-        Surface stale PRs before standup.
+        participants get a dm nudge, reply in plain words, and a live board in
+        your channel fills in as updates land. same tool, one less subscription.
       </>
     ),
   },
   {
-    title: "slash commands",
+    title: "built for coding agents",
     desc: (
       <>
-        <C>/atom pr</C> to see open PRs. <C>/atom me</C> for PRs waiting on you.{" "}
-        <C>/atom connect</C> to link accounts.
-      </>
-    ),
-  },
-  {
-    title: "review lifecycle",
-    desc: (
-      <>
-        Requested. Commented. Changes requested. Approved. Every review state is tracked and
-        surfaced in the thread.
-      </>
-    ),
-  },
-  {
-    title: "zero disruption",
-    desc: (
-      <>
-        Atom doesn't change how you write code, branch, or merge. It adds a communication layer
-        on top of your existing workflow.
+        a real cli and an mcp server ship in one package. your agent can install
+        atom, map repos, and configure reminders and standups end to end.{" "}
+        <C>claude mcp add atom -- atom mcp</C> and it speaks atom.
       </>
     ),
   },
@@ -93,7 +81,7 @@ export function Features() {
         <FadeIn>
           <p className="eyebrow mb-4">features</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-16">
-            built for teams that take code review seriously.
+            github to slack, without the noise.
           </h2>
         </FadeIn>
 

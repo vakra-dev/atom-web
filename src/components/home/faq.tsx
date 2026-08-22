@@ -7,35 +7,35 @@ import { FadeIn, Stagger, StaggerItem } from "../ui/fade-in";
 const faqs = [
   {
     q: "how long does setup take?",
-    a: "Two minutes. Install the GitHub App, add Atom to Slack, map your repos to channels. Notifications start flowing immediately.",
+    a: "about two minutes. run npx @useatom/cli init in your terminal. it signs you in with github, installs the github app and the slack bot, and maps your first repo to a channel. notifications start flowing immediately.",
   },
   {
-    q: "which github events does atom track?",
-    a: "PR opened, closed, merged, reopened. Reviews (approved, commented, changes requested). Comments, review comments, assignments, review requests, and new commits. Every meaningful PR event is captured.",
+    q: "does @atom approve really count as my approval?",
+    a: "yes. when you link your account, atom holds a github token that acts as you. approvals, change requests, comments, assignments, and labels all land on github under your name. approving never falls back to a bot account.",
+  },
+  {
+    q: "how noisy is it?",
+    a: "one message per event, never two. the pr message edits itself in place when status changes instead of reposting. you get a dm only when something waits on you, and the dm badge updates itself once it no longer does. errors and help are visible only to the person who asked.",
   },
   {
     q: "is my code safe?",
-    a: "Atom never reads or stores your source code. We receive webhook metadata from GitHub: PR titles, usernames, branch names, comments, and review states. Your code stays on GitHub.",
+    a: "atom never reads or stores your source code. it receives webhook metadata from github: pr titles, usernames, branch names, comments, and review states. your code stays on github.",
   },
   {
-    q: "how is this different from github's slack integration?",
-    a: "GitHub's integration posts individual event messages, unstructured and noisy. Atom creates one status card per PR with a dedicated thread for all activity. Structured. Threaded. Actionable. It also provides slash commands, daily reminders, intelligent routing, and identity-mapped mentions.",
+    q: "how is this different from github's own slack integration?",
+    a: "github's integration posts a separate message per event with no memory. atom keeps one living thread per pull request, lets you act on it from slack as yourself, and adds reminders and standups. it is a workflow, not a firehose.",
   },
   {
-    q: "does it work with github enterprise?",
-    a: "Atom supports GitHub.com and GitHub Enterprise Cloud. GitHub Enterprise Server support is on the roadmap.",
+    q: "what do the standups look like?",
+    a: "participants get a dm nudge at a time you choose, reply in plain words, and atom logs it. a single board message posts to your channel and fills in live as updates land, with a waiting list that shrinks. no forms, no thread spam.",
   },
   {
-    q: "do all team members need to configure atom?",
-    a: "No. One admin installs the integrations and maps repos to channels. Team members link their accounts with /atom connect to enable smart mentions.",
+    q: "can my coding agent set atom up?",
+    a: "yes, that is a first-class path. the docs ship in markdown with an llms.txt index, the cli is fully non-interactive with --json output, and an mcp server exposes setup and config as tools. point your agent at useatom.dev and ask it to install atom.",
   },
   {
-    q: "can developers receive dm notifications?",
-    a: "Yes. Atom posts to channels for team visibility. Individual developers can opt into DMs for events that directly involve them, like review requests, assignments, and mentions.",
-  },
-  {
-    q: "can i control which repos send notifications?",
-    a: "Yes. Only repos with an active channel mapping generate notifications. Add or remove mappings at any time from the dashboard.",
+    q: "can i control which repos post where?",
+    a: "yes. only repos with a channel mapping generate notifications. one channel can carry many repos. mappings, reminders, and standups are all configurable from slack, the cli, or the mcp server.",
   },
 ];
 

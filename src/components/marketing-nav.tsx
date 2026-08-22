@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { urls } from "../lib/urls";
 import { MobileMenu } from "./mobile-menu";
 
 const navLinks = [
-  { href: "#how-it-works", label: "how it works" },
-  { href: "#features", label: "features" },
-  { href: "#faq", label: "faq" },
+  { href: "/#how-it-works", label: "how it works" },
+  { href: "/#features", label: "features" },
+  { href: "/docs/", label: "docs" },
+  { href: "/#faq", label: "faq" },
 ];
 
 export function MarketingNav() {
@@ -32,12 +32,12 @@ export function MarketingNav() {
 
         <div className="flex items-center gap-3">
           <a
-            href={urls.app}
+            href="/docs/install/"
             className="hidden text-base font-medium text-white bg-ink px-4 py-1.5 rounded-md no-underline transition-all hover:bg-dark-3 hover:scale-[1.02] cursor-pointer md:inline-flex"
           >
             get started
           </a>
-          <MobileMenu links={navLinks} appUrl={urls.app} />
+          <MobileMenu links={navLinks} appUrl="/docs/install/" />
         </div>
       </div>
     </header>

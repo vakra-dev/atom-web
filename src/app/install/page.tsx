@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Install",
+  title: "install | atom",
   description:
-    "Set up Atom in about two minutes — with your terminal, or by pointing your coding agent at our instructions.",
+    "set up atom in about two minutes from your terminal, or point your coding agent at our instructions.",
 };
 
 const Code = ({ children }: { children: string }) => (
@@ -19,7 +19,7 @@ export default function InstallPage() {
         install atom
       </h1>
       <p className="mt-3 leading-relaxed text-ink-2">
-        atom runs from your terminal — no dashboard required. setup takes about
+        atom runs from your terminal, no dashboard required. setup takes about
         two minutes and three browser clicks.
       </p>
 
@@ -56,7 +56,7 @@ export default function InstallPage() {
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-ink-2">
         creates your workspace, installs the github app on your org, adds the
-        bot to slack, and maps your first repo to a channel. resumable — re-run
+        bot to slack, and maps your first repo to a channel. resumable, so re-run
         it anytime.
       </p>
       <Code>atom init</Code>
@@ -67,7 +67,7 @@ export default function InstallPage() {
       <Code>{`atom map org/repo "#channel"\natom status`}</Code>
 
       <p className="mt-2 text-sm leading-relaxed text-ink-2">
-        that&rsquo;s it — open a pull request and watch it land in slack.
+        that&rsquo;s it. open a pull request and watch it land in slack.
         someone else holds the github or slack admin access? run{" "}
         <span className="font-mono text-[13px] text-ink">atom invite</span> and
         they can finish just their step.
@@ -77,7 +77,7 @@ export default function InstallPage() {
         talk to atom from your agent
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-ink-2">
-        atom ships an mcp server — after setup, your coding agent can map
+        atom ships an mcp server. after setup, your coding agent can map
         repos, list channels, and check status conversationally.
       </p>
       <Code>claude mcp add atom -- atom mcp</Code>

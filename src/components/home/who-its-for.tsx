@@ -5,29 +5,29 @@ import { FadeIn, Stagger, StaggerItem } from "../ui/fade-in";
 const personas = [
   {
     title: "engineering leaders",
-    body: "You need visibility into your team's review process without micromanaging it. Atom gives you a real-time view of what's open, what's blocked, and what's been sitting too long.",
+    body: "you need visibility into review flow without micromanaging it. atom gives you a live view of what is open, what is blocked, and what has been sitting too long.",
     bullets: [
-      "real-time PR velocity across every repository",
-      "automated reminders that catch stale PRs early",
-      "channel-level visibility without additional tooling",
+      "scheduled summaries of open prs per channel",
+      "standups with a live board, no extra bot",
+      "channel-level visibility without another dashboard",
     ],
   },
   {
     title: "developers",
-    body: "You shouldn't have to check GitHub to know if your PR was reviewed. Atom brings every review, comment, and approval into Slack the moment it happens.",
+    body: "you should not have to check github to know whether your pr moved. atom brings every review, comment, and approval into slack the moment it happens.",
     bullets: [
-      "instant notifications for reviews, comments, and merges",
-      "one command to see everything waiting on you",
-      "tagged mentions that reach you where you work",
+      "a dm only when something actually waits on you",
+      "@atom my prs shows everything on your plate",
+      "approve and review from the thread, as yourself",
     ],
   },
   {
     title: "teams shipping continuously",
-    body: "Your deploy pipeline is fast. Your bottleneck is the human step. Atom compresses the gap between \"PR opened\" and \"PR reviewed.\"",
+    body: "your pipeline is fast. the human step is the bottleneck. atom compresses the gap between pr opened and pr reviewed.",
     bullets: [
-      "sub-minute notification latency",
-      "structured threads that keep review context organized",
-      "a communication layer that matches the speed of your pipeline",
+      "notifications in seconds, not inbox digests",
+      "threads keep review context in one place",
+      "your coding agent can run the whole setup",
     ],
   },
 ];
@@ -37,9 +37,9 @@ export function WhoItsFor() {
     <section className="bg-page">
       <div className="mx-auto max-w-6xl px-6 py-24">
         <FadeIn>
-          <p className="eyebrow mb-4">who it's for</p>
+          <p className="eyebrow mb-4">who it is for</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-12">
-            purpose built for modern engineering organizations.
+            built for teams that live in slack and ship from github.
           </h2>
         </FadeIn>
 

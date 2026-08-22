@@ -1,0 +1,22 @@
+# atom
+
+> atom is a github to slack platform for engineering teams. every pull request becomes a living slack thread that updates itself in place. teams review, approve, and act on prs from slack, attributed to them on github. atom also runs pr reminders and daily standups. it ships a cli (@useatom/cli) and an mcp server so coding agents can install and configure it end to end.
+
+atom is installed from the terminal with `npx @useatom/cli init`. agents can follow the install guide directly.
+
+## docs
+
+- [install atom](https://useatom.dev/docs/install.md): setup with the cli or a coding agent, invite codes for teammates, requirements
+- [using atom in slack](https://useatom.dev/docs/slack.md): slash commands, channel mentions, acting on pull requests as yourself
+- [cli reference](https://useatom.dev/docs/cli.md): every command, flag, and environment variable
+- [mcp server](https://useatom.dev/docs/mcp.md): the fourteen tools agents use to configure atom
+- [pr reminders](https://useatom.dev/docs/reminders.md): scheduled open pull request summaries per channel
+- [standups](https://useatom.dev/docs/standups.md): dm capture, nudges, and the live board
+
+## agent install
+
+- [llms-install.md](https://useatom.dev/llms-install.md): step-by-step instructions written for coding agents performing the installation
+
+## optional
+
+- [llms-full.txt](https://useatom.dev/llms-full.txt): all documentation concatenated into one file
