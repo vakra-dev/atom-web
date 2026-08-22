@@ -34,6 +34,35 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://useatom.dev" },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://useatom.dev/#organization",
+      name: "atom",
+      url: "https://useatom.dev",
+      logo: "https://useatom.dev/icon.svg",
+      contactPoint: {
+        "@type": "ContactPoint",
+        email: "support@useatom.dev",
+        contactType: "customer support",
+        url: "https://useatom.dev/contact/",
+      },
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "atom",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Web, Slack, CLI",
+      url: "https://useatom.dev",
+      description:
+        "atom streams github into tidy slack threads, chases reviews for you, and runs your daily standup with a live board. review actions run on github as you, and a cli and mcp server let coding agents configure everything.",
+      publisher: { "@id": "https://useatom.dev/#organization" },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -42,6 +71,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} ${jetbrains.variable}`}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
           <script
             defer

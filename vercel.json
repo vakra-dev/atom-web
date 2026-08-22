@@ -1,0 +1,76 @@
+{
+  "headers": [
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/llms.txt>; rel=\"alternate\"; type=\"text/plain\"; title=\"llms.txt\""
+        }
+      ]
+    },
+    {
+      "source": "/docs/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/llms-full.txt>; rel=\"alternate\"; type=\"text/plain\"; title=\"all docs as text\""
+        }
+      ]
+    },
+    {
+      "source": "/docs/install/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/docs/install.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/docs/slack/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/docs/slack.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/docs/cli/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/docs/cli.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/docs/mcp/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/docs/mcp.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/docs/reminders/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/docs/reminders.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    },
+    {
+      "source": "/docs/standups/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/docs/standups.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
+    }
+  ]
+}

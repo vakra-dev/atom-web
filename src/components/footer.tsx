@@ -21,7 +21,8 @@ const groups = [
   {
     title: "company",
     links: [
-      { label: "contact", href: "mailto:support@useatom.dev" },
+      { label: "about", href: "/about" },
+      { label: "contact", href: "/contact" },
       { label: "privacy", href: "/privacy" },
       { label: "terms", href: "/terms" },
     ],

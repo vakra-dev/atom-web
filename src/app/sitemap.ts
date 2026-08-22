@@ -6,7 +6,15 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://useatom.dev";
 
-  const staticPages = ["", "/install", "/docs", "/privacy", "/terms"].map(
+  const staticPages = [
+    "",
+    "/install",
+    "/docs",
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
+  ].map(
     (path) => ({
       url: `${base}${path}/`.replace(/\/\/$/, "/"),
       lastModified: new Date(),
