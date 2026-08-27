@@ -26,7 +26,7 @@ configuration confirmations post in the channel so the whole team sees what chan
 | `@atom feedback ...` | send us feedback, right from slack. |
 | `@atom help` | what atom can do in a channel. |
 
-plain language works: atom understands phrasing like "@atom what's waiting on me?".
+plain language works: atom understands phrasing like "@atom show my open pull requests".
 
 ## mention atom in a pull request thread
 
