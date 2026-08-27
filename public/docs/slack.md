@@ -19,8 +19,8 @@ configuration confirmations post in the channel so the whole team sees what chan
 
 | say | what happens |
 |---|---|
-| `@atom pending prs` | a summary of open pull requests for this channel's repos, grouped by repo with authors and ages. |
-| `@atom my prs` | everything waiting on you across the workspace: your prs, assignments, and requested reviews. visible only to you. |
+| `@atom pending prs` | a summary of open pull requests for this channel's repos, replied in a thread under your message, grouped by repo with authors and ages. |
+| `@atom my prs` | your open pull requests across the workspace. visible only to you. |
 | `@atom reminder config` | this channel's reminder schedule. |
 | `@atom standup config` | the standup schedule and participants. |
 | `@atom feedback ...` | send us feedback, right from slack. |
