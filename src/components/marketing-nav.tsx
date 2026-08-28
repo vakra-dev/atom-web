@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { AtomMark } from "./atom-mark";
 import { MobileMenu } from "./mobile-menu";
 
 const navLinks = [
@@ -14,7 +15,11 @@ export function MarketingNav() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-page/95 backdrop-blur-xl">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        <Link href="/" className="text-lg font-semibold text-ink no-underline">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-2xl font-semibold text-ink no-underline"
+        >
+          <AtomMark size={26} className="translate-y-0.5" />
           atom
         </Link>
 

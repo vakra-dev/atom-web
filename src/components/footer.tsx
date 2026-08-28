@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AtomMark } from "./atom-mark";
 
 const groups = [
   {
@@ -34,7 +35,10 @@ export function Footer() {
     <footer className="bg-surface-alt border-t border-line">
       <div className="mx-auto flex max-w-6xl flex-wrap items-start justify-between gap-12 px-6 py-16">
         <div className="flex flex-col gap-2">
-          <span className="text-lg font-semibold text-ink">atom</span>
+          <span className="flex items-center gap-2 text-2xl font-semibold text-ink">
+            <AtomMark size={26} className="translate-y-0.5" />
+            atom
+          </span>
           <span className="text-base text-ink-2 max-w-sm leading-relaxed">
             the developer productivity platform for fast moving engineering
             teams.
