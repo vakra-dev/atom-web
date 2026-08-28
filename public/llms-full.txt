@@ -84,7 +84,7 @@ configuration confirmations post in the channel so the whole team sees what chan
 | say | what happens |
 |---|---|
 | `@atom pending prs` | a summary of open pull requests for this channel's repos, replied in a thread under your message, grouped by repo with authors and ages. |
-| `@atom my prs` | your open pull requests across the workspace. visible only to you. |
+| `@atom my prs` | your open pull requests across the workspace, replied in a thread under your message. |
 | `@atom reminder config` | this channel's reminder schedule. |
 | `@atom standup config` | the standup schedule and participants. |
 | `@atom feedback ...` | send us feedback, right from slack. |
@@ -107,7 +107,7 @@ inside a pr thread, mentions act on that pull request, on github, as you:
 | `@atom remove labels docs` | removes labels. |
 | `@atom close` and `@atom reopen` | closes or reopens the pr. |
 
-a successful action gets a checkmark reaction on your message and nothing else: the thread stays clean because your command is the record. errors are visible only to you. approving never falls back to a bot account, so an approval from slack is a real approval from you.
+a successful action gets a checkmark reaction on your message and nothing else: the thread stays clean because your command is the record. when something cannot be done, atom replies in the thread and says why. approving never falls back to a bot account, so an approval from slack is a real approval from you.
 
 ## notifications you can live with
 

@@ -72,5 +72,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/install",
+      "destination": "/docs/install/",
+      "permanent": true
+    },
+    {
+      "source": "/install/",
+      "destination": "/docs/install/",
+      "permanent": true
+    }
   ]
 }
