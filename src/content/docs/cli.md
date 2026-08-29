@@ -21,6 +21,16 @@ the atom cli (`@useatom/cli`, binary `atom`) is the fastest way to set up and co
 | `atom invite` | print the invite code for teammates. |
 | `atom join <code>` | join a workspace with an invite code. pasted invite links work too. |
 
+## inbox and insights
+
+| command | what it does |
+|---|---|
+| `atom inbox` | everything that needs you: reviews waiting on you, your own prs ranked by what needs action, and prs where you are mentioned or assigned. |
+| `atom insights` | this week's team metrics with last week alongside, including a review load chart. scope with `--repos org/repo,org/other`. |
+| `atom stats` | your personal week: prs, reviews given, response times. |
+
+all three support `--json` for scripts and agents.
+
 ## repos and channels
 
 | command | what it does |
@@ -39,6 +49,8 @@ one channel can carry many repos. each repo maps to exactly one channel.
 | `atom reminders` | list reminder configs. |
 | `atom reminders set --channel #x` | create or update reminders for a channel. options: `--time 10:00`, `--tz America/New_York`, `--days mon,tue,wed,thu,fri`, `--repos api,web`. repos default to the channel's mapped repos. |
 | `atom reminders delete --channel #x` | remove reminders from a channel. |
+
+add `--digest on` to `atom reminders set` to get a monday morning week in review for the channel, and `--digest-time 09:00` to pick when it posts.
 
 ## standup
 

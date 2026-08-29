@@ -19,6 +19,11 @@ export const docSections: DocSection[] = [
     description: "slash commands, channel mentions, and acting on prs as yourself.",
   },
   {
+    slug: "insights",
+    title: "inbox and insights",
+    description: "what needs you, and how your team is really doing.",
+  },
+  {
     slug: "cli",
     title: "cli reference",
     description: "every atom command, flag, and environment variable.",

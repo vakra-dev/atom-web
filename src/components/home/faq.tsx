@@ -26,6 +26,10 @@ const faqs = [
     a: "github's integration posts a separate message per event with no memory. atom keeps one living thread per pull request, lets you act on it from slack as yourself, and adds reminders and standups. it is a workflow, not a firehose.",
   },
   {
+    q: "how much does atom cost?",
+    a: "atom is free during early access. paid plans will be launched soon.",
+  },
+  {
     q: "what do the standups look like?",
     a: "participants get a dm nudge at a time you choose, reply in plain words, and atom logs it. a single board message posts to your channel and fills in live as updates land, with a waiting list that shrinks. no forms, no thread spam.",
   },

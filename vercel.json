@@ -71,6 +71,15 @@
           "value": "<https://useatom.dev/docs/standups.md>; rel=\"alternate\"; type=\"text/markdown\""
         }
       ]
+    },
+    {
+      "source": "/docs/insights/",
+      "headers": [
+        {
+          "key": "Link",
+          "value": "<https://useatom.dev/docs/insights.md>; rel=\"alternate\"; type=\"text/markdown\""
+        }
+      ]
     }
   ],
   "redirects": [

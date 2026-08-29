@@ -21,6 +21,9 @@ configuration confirmations post in the channel so the whole team sees what chan
 |---|---|
 | `@atom pending prs` | a summary of open pull requests for this channel's repos, replied in a thread under your message, grouped by repo with authors and ages. |
 | `@atom my prs` | your open pull requests across the workspace, replied in a thread under your message. |
+| `@atom inbox` | everything that needs you in three buckets: reviews waiting on you, your own pull requests ranked by what needs action, and prs where you are mentioned or assigned. |
+| `@atom insights` | this week's numbers for the channel's repos: merged and opened counts, median time to first review, publish to merge time, review cycles, first pass rate, review load, and stale prs. last week shown alongside. |
+| `@atom stats` | your personal week: prs opened and merged, reviews given, your median response time, and how long your prs waited for review. |
 | `@atom reminder config` | this channel's reminder schedule. |
 | `@atom standup config` | the standup schedule and participants. |
 | `@atom feedback ...` | send us feedback, right from slack. |
@@ -44,6 +47,15 @@ inside a pr thread, mentions act on that pull request, on github, as you:
 | `@atom close` and `@atom reopen` | closes or reopens the pr. |
 
 a successful action gets a checkmark reaction on your message and nothing else: the thread stays clean because your command is the record. when something cannot be done, atom replies in the thread and says why. approving never falls back to a bot account, so an approval from slack is a real approval from you.
+
+## the thread keeps watch
+
+some things post to the thread without anyone asking:
+
+- when checks finish, the result lands in the thread: "checks passed in 3m 42s" or "checks failed" with the failing job named and linked.
+- draft prs post with a draft badge and flip to open when marked ready for review.
+- when a pr sits quiet, atom nudges: a gentle note at one day, a firmer one at two, and a message to the channel at three so the team sees it. any activity resets the clock.
+- the moment a pr develops a conflict with its base branch, the thread says so. once, not repeatedly.
 
 ## notifications you can live with
 

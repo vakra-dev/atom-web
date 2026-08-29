@@ -31,6 +31,23 @@ npm install -g @useatom/cli
 atom init
 ```
 
+## verify your setup
+
+run `atom status` any time to see the full setup checklist: what is connected, what is configured, and the exact command to fix anything that is not.
+
+```
+  setup checklist
+  ✓ github connected (your-org)
+  ✓ slack connected (your workspace)
+  ✓ repos mapped to channels (3)
+  ✓ your slack identity is linked
+  ✓ pr reminders on (#eng-reviews)
+  ○ weekly digest not set (optional: atom reminders set --channel #eng-reviews --digest on)
+  ○ standup not set (optional: atom standup enable --channel #eng-reviews)
+```
+
+the first four are the core setup. reminders, the digest, and standups are optional and can be turned on per channel whenever your team wants them. `atom status --json` gives the same picture to scripts and agents.
+
 ## bring your team in
 
 teammates join with an invite code instead of installing anything on github or slack:
@@ -85,6 +102,9 @@ configuration confirmations post in the channel so the whole team sees what chan
 |---|---|
 | `@atom pending prs` | a summary of open pull requests for this channel's repos, replied in a thread under your message, grouped by repo with authors and ages. |
 | `@atom my prs` | your open pull requests across the workspace, replied in a thread under your message. |
+| `@atom inbox` | everything that needs you in three buckets: reviews waiting on you, your own pull requests ranked by what needs action, and prs where you are mentioned or assigned. |
+| `@atom insights` | this week's numbers for the channel's repos: merged and opened counts, median time to first review, publish to merge time, review cycles, first pass rate, review load, and stale prs. last week shown alongside. |
+| `@atom stats` | your personal week: prs opened and merged, reviews given, your median response time, and how long your prs waited for review. |
 | `@atom reminder config` | this channel's reminder schedule. |
 | `@atom standup config` | the standup schedule and participants. |
 | `@atom feedback ...` | send us feedback, right from slack. |
@@ -109,12 +129,71 @@ inside a pr thread, mentions act on that pull request, on github, as you:
 
 a successful action gets a checkmark reaction on your message and nothing else: the thread stays clean because your command is the record. when something cannot be done, atom replies in the thread and says why. approving never falls back to a bot account, so an approval from slack is a real approval from you.
 
+## the thread keeps watch
+
+some things post to the thread without anyone asking:
+
+- when checks finish, the result lands in the thread: "checks passed in 3m 42s" or "checks failed" with the failing job named and linked.
+- draft prs post with a draft badge and flip to open when marked ready for review.
+- when a pr sits quiet, atom nudges: a gentle note at one day, a firmer one at two, and a message to the channel at three so the team sees it. any activity resets the clock.
+- the moment a pr develops a conflict with its base branch, the thread says so. once, not repeatedly.
+
 ## notifications you can live with
 
 - one message per event, never two.
 - the pr message edits itself through open, changes requested, approved, merged, and closed.
 - dms only when something waits on you, and the dm badge updates itself when it no longer does.
 - pushes show the real commit count and messages, linked to the compare view.
+
+---
+
+# inbox and insights
+
+atom keeps track of what needs you and how your team is really doing, computed live from your pull request activity. both are available in slack, the terminal, and through the mcp server for coding agents.
+
+## your inbox
+
+ask `@atom inbox` in slack, run `atom inbox` in your terminal, or let your agent call `get_inbox`. you get three buckets:
+
+- **needs your review**: pull requests where your review was requested, oldest request first, so the person who has waited longest is at the top.
+- **your pull requests**: your own open prs, ranked by what needs your action. changes requested come first, then failing checks and merge conflicts, then approved prs ready to merge, then everything else.
+- **mentioned or assigned**: prs where someone mentioned you in a comment or assigned you, most recent activity first.
+
+a pull request appears once, in its most urgent bucket. draft prs never show up in anyone's review queue.
+
+## team insights
+
+ask `@atom insights` in a channel and atom answers for that channel's repos. run `atom insights` in the terminal for the whole workspace, or scope it with `--repos`. the numbers cover the current week, with last week alongside:
+
+- pull requests merged and opened
+- time to first review
+- publish to merge time
+- review cycles until merge
+- first pass rate: the share of prs approved without a round of changes
+- review load per reviewer
+- pull requests that are stale right now
+
+## your stats
+
+`@atom stats` in slack or `atom stats` in the terminal shows your own week: prs opened and merged, reviews you gave, your median response time to review requests, and how long your own prs waited for a first review.
+
+## the weekly digest
+
+a channel can opt into a monday morning week in review that covers the same ground automatically. see [pr reminders](/docs/reminders/) for setup.
+
+## how the numbers are computed
+
+metrics are only useful if you can trust them, so here is exactly how atom counts:
+
+- **medians, not averages.** one monster pr should not distort your week.
+- **merged pull requests only.** abandoned prs do not count against review speed.
+- **the clock starts at ready for review.** if a pr is opened as a draft, timing starts when it is marked ready, not when it was created. time spent drafting is not time spent waiting.
+- **response time pairs each request with the reviewer's next review.** if you are re-requested after changes, that is a new pair. the median across pairs is your response time.
+- **first pass rate** counts merged prs that never received a changes requested review.
+- **bots are excluded.** dependabot opening forty prs does not change your team's numbers.
+- **everything is live.** metrics are computed from events as they arrive, not from a nightly sync.
+
+atom never reads your source code for any of this. all metrics come from the same webhook metadata that powers notifications: titles, states, timestamps, and usernames.
 
 ---
 
@@ -141,6 +220,16 @@ the atom cli (`@useatom/cli`, binary `atom`) is the fastest way to set up and co
 | `atom invite` | print the invite code for teammates. |
 | `atom join <code>` | join a workspace with an invite code. pasted invite links work too. |
 
+## inbox and insights
+
+| command | what it does |
+|---|---|
+| `atom inbox` | everything that needs you: reviews waiting on you, your own prs ranked by what needs action, and prs where you are mentioned or assigned. |
+| `atom insights` | this week's team metrics with last week alongside, including a review load chart. scope with `--repos org/repo,org/other`. |
+| `atom stats` | your personal week: prs, reviews given, response times. |
+
+all three support `--json` for scripts and agents.
+
 ## repos and channels
 
 | command | what it does |
@@ -159,6 +248,8 @@ one channel can carry many repos. each repo maps to exactly one channel.
 | `atom reminders` | list reminder configs. |
 | `atom reminders set --channel #x` | create or update reminders for a channel. options: `--time 10:00`, `--tz America/New_York`, `--days mon,tue,wed,thu,fri`, `--repos api,web`. repos default to the channel's mapped repos. |
 | `atom reminders delete --channel #x` | remove reminders from a channel. |
+
+add `--digest on` to `atom reminders set` to get a monday morning week in review for the channel, and `--digest-time 09:00` to pick when it posts.
 
 ## standup
 
@@ -214,8 +305,11 @@ any mcp-capable client works the same way: run `atom mcp` as a stdio server.
 | `map_repo` | route a repo to a channel. accepts bare names and `#channel`. |
 | `unmap_repo` | remove a repo's mapping. |
 | `get_invite_link` | invite code for bringing teammates in. |
+| `get_inbox` | the signed-in user's pr inbox: reviews waiting on them, their own prs, and where they are mentioned. useful before starting new work. |
+| `get_insights` | team metrics for the week with last week for comparison. optionally scoped to specific repos. |
+| `get_stats` | the signed-in user's personal week: prs, reviews, response times. |
 | `list_reminders` | pr reminder configs per channel. |
-| `set_reminder` | create or update a channel's reminders. repos default to the channel's mappings. |
+| `set_reminder` | create or update a channel's reminders. repos default to the channel's mappings. can also turn on the monday digest. |
 | `delete_reminder` | remove a channel's reminders. |
 | `get_standup` | the standup config: times, days, participants. |
 | `set_standup` | create, update, pause, or resume the standup. |
@@ -248,6 +342,12 @@ a single message, grouped by repo:
 run `/atom reminders` in the channel that should receive the summary. the form covers timezone, time of day, days of the week, and which repos to include. it pre-selects the channel's mapped repos, and if a config already exists it loads it for editing. saving posts a confirmation in the channel.
 
 turn them off with `/atom reminders off`.
+
+## weekly digest
+
+alongside the daily summary, a channel can get a monday morning week in review: how many prs merged, how fast reviews went compared to the week before, who carried the review load, and what is still open from last week.
+
+turn it on from the terminal with `atom reminders set --channel "#your-channel" --digest on`, and pick the posting time with `--digest-time 09:00`. it posts once per week in the channel's timezone.
 
 ## configure from the terminal
 

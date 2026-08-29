@@ -8,8 +8,9 @@ atom is installed from the terminal with `npx @useatom/cli init`. agents can fol
 
 - [install atom](https://useatom.dev/docs/install.md): setup with the cli or a coding agent, invite codes for teammates, requirements
 - [using atom in slack](https://useatom.dev/docs/slack.md): slash commands, channel mentions, acting on pull requests as yourself
+- [inbox and insights](https://useatom.dev/docs/insights.md): what needs you, team review metrics, personal stats, the weekly digest, and how the numbers are computed
 - [cli reference](https://useatom.dev/docs/cli.md): every command, flag, and environment variable
-- [mcp server](https://useatom.dev/docs/mcp.md): the fourteen tools agents use to configure atom
+- [mcp server](https://useatom.dev/docs/mcp.md): the seventeen tools agents use to configure and query atom
 - [pr reminders](https://useatom.dev/docs/reminders.md): scheduled open pull request summaries per channel
 - [standups](https://useatom.dev/docs/standups.md): dm capture, nudges, and the live board
 

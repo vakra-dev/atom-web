@@ -1,6 +1,7 @@
 import { Hero } from "../components/home/hero";
 import { Problem } from "../components/home/problem";
 import { Solution } from "../components/home/solution";
+import { InboxInsights } from "../components/home/inbox-insights";
 import { HowItWorks } from "../components/home/how-it-works";
 import { Features } from "../components/home/features";
 import { AgentInstall } from "../components/home/agent-install";
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <Problem />
       <Solution />
+      <InboxInsights />
       <HowItWorks />
       <Features />
       <AgentInstall />

@@ -16,7 +16,7 @@ const features = [
     title: "living pr threads",
     desc: (
       <>
-        one thread per pull request. the main message flips through five states,
+        one thread per pull request. the main message flips through its states,
         from <C>open</C> to <C>merged</C>, editing itself in place with title,
         link, commits, and diff counts always current.
       </>
@@ -30,6 +30,63 @@ const features = [
         <C>assign</C>, <C>labels</C>, <C>close</C>, <C>reopen</C>. every action
         runs on github under your name, not a bot account. plain language works
         too, like <C>@atom lgtm</C>.
+      </>
+    ),
+  },
+  {
+    title: "your pr inbox",
+    desc: (
+      <>
+        <C>@atom inbox</C> shows everything that needs you: reviews waiting on
+        you, your own prs ranked by what needs action, and where you are
+        mentioned. also in your terminal as <C>atom inbox</C>.
+      </>
+    ),
+  },
+  {
+    title: "team insights",
+    desc: (
+      <>
+        <C>@atom insights</C> answers with real numbers: median time to first
+        review, publish to merge, review load, first pass rate. computed live
+        from your prs, with the methodology published.
+      </>
+    ),
+  },
+  {
+    title: "ci status in the thread",
+    desc: (
+      <>
+        checks pass or fail right in the pr thread, with the failing job named
+        and linked. approve when green without opening github.
+      </>
+    ),
+  },
+  {
+    title: "stale pr nudges",
+    desc: (
+      <>
+        when a pr stops moving, atom nudges the right reviewer at one day,
+        again at two, and tells the channel at three. any activity resets the
+        clock.
+      </>
+    ),
+  },
+  {
+    title: "merge conflict alerts",
+    desc: (
+      <>
+        know the moment a pr conflicts with its base branch, not at merge time.
+        one alert in the thread, and it stays quiet once you fix it.
+      </>
+    ),
+  },
+  {
+    title: "the monday digest",
+    desc: (
+      <>
+        a week in review for your channel: what merged, how fast reviews went
+        compared to last week, who carried the load, and what is stuck.
       </>
     ),
   },

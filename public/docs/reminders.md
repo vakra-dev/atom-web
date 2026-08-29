@@ -17,6 +17,12 @@ run `/atom reminders` in the channel that should receive the summary. the form c
 
 turn them off with `/atom reminders off`.
 
+## weekly digest
+
+alongside the daily summary, a channel can get a monday morning week in review: how many prs merged, how fast reviews went compared to the week before, who carried the review load, and what is still open from last week.
+
+turn it on from the terminal with `atom reminders set --channel "#your-channel" --digest on`, and pick the posting time with `--digest-time 09:00`. it posts once per week in the channel's timezone.
+
 ## configure from the terminal
 
 ```bash

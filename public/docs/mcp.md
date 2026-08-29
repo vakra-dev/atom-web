@@ -30,8 +30,11 @@ any mcp-capable client works the same way: run `atom mcp` as a stdio server.
 | `map_repo` | route a repo to a channel. accepts bare names and `#channel`. |
 | `unmap_repo` | remove a repo's mapping. |
 | `get_invite_link` | invite code for bringing teammates in. |
+| `get_inbox` | the signed-in user's pr inbox: reviews waiting on them, their own prs, and where they are mentioned. useful before starting new work. |
+| `get_insights` | team metrics for the week with last week for comparison. optionally scoped to specific repos. |
+| `get_stats` | the signed-in user's personal week: prs, reviews, response times. |
 | `list_reminders` | pr reminder configs per channel. |
-| `set_reminder` | create or update a channel's reminders. repos default to the channel's mappings. |
+| `set_reminder` | create or update a channel's reminders. repos default to the channel's mappings. can also turn on the monday digest. |
 | `delete_reminder` | remove a channel's reminders. |
 | `get_standup` | the standup config: times, days, participants. |
 | `set_standup` | create, update, pause, or resume the standup. |

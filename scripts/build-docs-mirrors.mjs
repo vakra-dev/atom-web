@@ -9,7 +9,7 @@ const root = process.cwd();
 const srcDir = path.join(root, "src", "content", "docs");
 const outDir = path.join(root, "public", "docs");
 
-const order = ["install", "slack", "cli", "mcp", "reminders", "standups"];
+const order = ["install", "slack", "insights", "cli", "mcp", "reminders", "standups"];
 
 fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });

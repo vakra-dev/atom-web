@@ -24,6 +24,23 @@ npm install -g @useatom/cli
 atom init
 ```
 
+## verify your setup
+
+run `atom status` any time to see the full setup checklist: what is connected, what is configured, and the exact command to fix anything that is not.
+
+```
+  setup checklist
+  ✓ github connected (your-org)
+  ✓ slack connected (your workspace)
+  ✓ repos mapped to channels (3)
+  ✓ your slack identity is linked
+  ✓ pr reminders on (#eng-reviews)
+  ○ weekly digest not set (optional: atom reminders set --channel #eng-reviews --digest on)
+  ○ standup not set (optional: atom standup enable --channel #eng-reviews)
+```
+
+the first four are the core setup. reminders, the digest, and standups are optional and can be turned on per channel whenever your team wants them. `atom status --json` gives the same picture to scripts and agents.
+
 ## bring your team in
 
 teammates join with an invite code instead of installing anything on github or slack:
